@@ -1,0 +1,33 @@
+
+#generalStatistics{
+    display: flex;
+    width: 1100px;
+    height: 80px;
+    margin: auto;
+    background-color: #c4c4c4;
+    align-items: stretch
+}
+#generalStatistics>.textContainers{
+    background-color: #ACBAEC;
+    margin:5px 7px;
+}
+.textContainers{
+    font-family: Rosario;
+    font-size: 48px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+.greenText{
+    color: #09DC51;
+}
+.regularText{
+    color: #2A2E2B;
+}
+.redText{
+    color: #FF0000;
+}
+.yellowText{
+    color: #FFE600;
+}
