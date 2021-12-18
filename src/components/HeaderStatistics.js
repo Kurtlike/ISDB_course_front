@@ -12,6 +12,10 @@ class HeaderStatistics extends React.Component{
             died: 0
         }
     }
+    componentDidMount() {
+        this.interval = setInterval(()=>  getStatistic(this),1000);
+    }
+
     render() {
         return (<div id="generalStatistics" className="divContainers textContainers" >
             <TextContainer text = {this.state.vaccinated} classN = "greenText textContainers"/>
@@ -23,3 +27,21 @@ class HeaderStatistics extends React.Component{
     }
 }
 export default HeaderStatistics;
+
+function getStatistic(state) {
+    fetch("http://localhost:8081/getHumanStatistic")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                state.setState({
+                    vaccinated: result.vaccinated,
+                    regular: result.regular,
+                    infected: result.infected,
+                    died: result.died
+                })
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+}

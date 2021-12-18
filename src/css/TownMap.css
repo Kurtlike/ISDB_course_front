@@ -6,3 +6,17 @@
     height: 100%;
     width: 100%;
 }
+.svgText{
+    font-family: Rosario;
+    fill: #555151;
+    font-size: 40px;
+}
+.redSvgText{
+    fill: #FF0000;
+}
+.greenSvgText{
+    fill: #09DC51;
+}
+.yellowSvgText{
+    fill: #FFE600;
+}

@@ -1,4 +1,77 @@
 .userInput{
     height: 100%;
     width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.userInput>.strainForm{
+    width: 300px;
+    height: 500px;
+    margin: 30px 30px 30px;
+    overflow: auto;
+}
+.userInput>.strainForm>.textContainers{
+    margin: 10px;
+}
+#contForm{
+    margin: 30px 30px 30px;
+    background-color: #C4C4C4;
+    width: 900px;
+    height: 300px;
+}
+#virusForm{
+    background-color: rgba(255,00,00,0.27);
+}
+.tableName{
+    text-align: center;
+    font-size: 48px;
+}
+#virusForm>.tableName, #virusForm>.textContainers{
+    color: #7A4343;
+}
+#vacForm>.tableName, #vacForm>.textContainers{
+    color: #437A5C;
+}
+#contForm>.tableName{
+    color: #726D6D;
+}
+.restrString>.textContainers, .restrString>input, .restrString>select, #contForm>div>button{
+    color: #555151;
+    background-color: #ACBAEC;
+}
+#vacForm{
+    background-color: rgba(0,255,41,0.22);
+}
+#virusForm>.textContainers, #vacForm>.textContainers{
+    background-color: #C4C4C4;
+}
+.addStrain{
+    width: 94%;
+    border-radius: 10%;
+    border-color: #860808;
+}
+.restrString{
+    display: flex;
+}
+.restrString>.textContainers{
+    margin: 10px ;
+}
+.restrString>input{
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+.restrString>select{
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+#contForm>div>button{
+    border-radius: 10%;
+    width: 30px;
+    margin: 10px 10px 10px 0px;
+    text-align: center;
+    font-size: 25px;
 }
