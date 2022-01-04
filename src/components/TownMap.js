@@ -51,5 +51,9 @@ function getMapStatistics(state){
 }
 function getMapFill(district) {
     let all = district.regular + district.vaccinated + district.infected + district.died;
-    return "#" + (parseInt((district.died / all * 266).toString(10), 10)).toString(16) + (parseInt((district.vaccinated / all * 266).toString(10), 10)).toString(16) + (parseInt((district.infected / all * 266).toString(10), 10)).toString(16);
+    let red = parseInt(170 + (district.died/all) * 85, 10);
+    let green = parseInt(170 + (district.vaccinated/all) * 85, 10);
+    let blue = 170;
+    console.log(red + " " + green + " " + blue);
+    return "#" + red.toString(16) + green.toString(16) + blue.toString(16);
 }

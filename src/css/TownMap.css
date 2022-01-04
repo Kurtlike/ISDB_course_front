@@ -1,5 +1,5 @@
 .townMap{
-    height: 100%;
+    height: 90vh;
     width: 50%;
 }
 .townMap>svg{

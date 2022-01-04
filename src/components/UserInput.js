@@ -24,7 +24,7 @@ class UserInput extends React.Component{
     render() {
         return(
             <div className="userInput">
-                <StrainForm id="virusForm" tableName = "Вирус" data={this.state.viruses}/>
+                <StrainForm id="virusForm" tableName = "Вирусы" data={this.state.viruses}/>
                 <StrainForm id="vacForm" tableName = "Вакцины" data={this.state.vaccines}/>
                 <RestrictionForm remedies={this.state.remedies}/>
             </div>
