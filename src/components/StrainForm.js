@@ -7,7 +7,7 @@ class StrainForm extends React.Component{
             <div className="strainForm" id={this.props.id}>
                 <TextContainer text={this.props.tableName} classN="tableName"/>
                 {setStrain(this.props.data, "regularText textContainers")}
-                <button className="addStrain regularText textContainers">+</button>
+                <button className="addStrain regularText textContainers" onClick={this.props.addFunction}>+</button>
             </div>
         );
     }

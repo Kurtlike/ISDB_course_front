@@ -54,6 +54,5 @@ function getMapFill(district) {
     let red = parseInt(170 + (district.died/all) * 85, 10);
     let green = parseInt(170 + (district.vaccinated/all) * 85, 10);
     let blue = 170;
-    console.log(red + " " + green + " " + blue);
     return "#" + red.toString(16) + green.toString(16) + blue.toString(16);
 }

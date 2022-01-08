@@ -1,0 +1,44 @@
+.darkened{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+}
+.modal{
+    position: fixed;
+    width: 10%;
+    top: 30%;
+    left: 45%;
+    flex-direction: column;
+    display: flex;
+    padding: 10px 0 10px 0;
+    background-color: #c4c4c4;
+}
+
+.modal>div{
+    background-color: #ACBAEC;
+    font-family: Rosario;
+    color: #FFE600;
+    font-size: 20px;
+    padding: 5px 5px 5px 5px;
+    margin:  0 5px 0 5px;
+}
+.modal>input{
+    background-color: #ACBAEC;
+    font-family: Rosario;
+    color: #FFE600;
+    font-size: 20px;
+    padding: 5px 5px 5px 5px;
+    margin:  0 5px 0 5px;
+}
+.modal>button{
+    background-color: #ACBAEC;
+    font-family: Rosario;
+    color: #FFE600;
+    font-size: 20px;
+    padding: 5px 5px 5px 5px;
+    margin:  5px 5px 0 5px;
+}
