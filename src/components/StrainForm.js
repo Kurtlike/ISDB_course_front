@@ -16,7 +16,12 @@ export default StrainForm;
 function setStrain(strains, className){
     let s = [];
     strains.forEach(el=> {
-         s.push(<TextContainer key={el.virusId} text={el.virusId} classN={className}/>);
+        if(strains.virus === true){
+            s.push(<TextContainer key={el.virusId} text={el.virusId} classN={className}/>);
+        }else {
+            s.push(<TextContainer key={el.vaccineId} text={el.vaccineId} classN={className}/>);
+        }
+
     })
  return s;
 }

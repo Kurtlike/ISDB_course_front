@@ -109,6 +109,7 @@ function getViruses(state) {
         .then(res => res.json())
         .then(
             (result) => {
+                result.virus = true;
                 state.setState({
                     viruses: result
                 })
@@ -122,6 +123,7 @@ function getVaccines(state) {
         .then(res => res.json())
         .then(
             (result) => {
+                result.virus = false;
                 state.setState({
                     vaccines: result
                 })
