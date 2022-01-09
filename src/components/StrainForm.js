@@ -16,7 +16,7 @@ export default StrainForm;
 function setStrain(strains, className){
     let s = [];
     strains.forEach(el=> {
-         s.push(<TextContainer key={el} text={el} classN={className}/>);
+         s.push(<TextContainer key={el.virusId} text={el.virusId} classN={className}/>);
     })
  return s;
 }

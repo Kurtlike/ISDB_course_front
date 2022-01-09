@@ -6,17 +6,24 @@ class VaccineAdder extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            virusId: 0,
+            virusId: "",
+            vaccineId: "",
             maxAge: 0,
             efficiency: 0
         }
         this.virusIdChange = this.virusIdChange.bind(this);
+        this.vaccineIdChange = this.vaccineIdChange.bind(this);
         this.maxAgeChange = this.maxAgeChange.bind(this);
         this.efficiencyChange = this.efficiencyChange.bind(this);
     }
     virusIdChange(event){
         this.setState({
             virusId: event.target.value
+        });
+    }
+    vaccineIdChange(event){
+        this.setState({
+            vaccineId: event.target.value
         });
     }
     maxAgeChange(event){
@@ -34,13 +41,15 @@ class VaccineAdder extends React.Component{
         return (
             <div className = "darkened">
                 <div className = "modal">
-                    <TextContainer text = "Заразность"/>
+                    <TextContainer text = "Вирус"/>
                     <input type="text" value={this.state.virusId} onChange={this.virusIdChange}/>
-                    <TextContainer text = "Смертность" />
+                    <TextContainer text = "Имя вакцины"/>
+                    <input type="text" value={this.state.vaccineId} onChange={this.vaccineIdChange}/>
+                    <TextContainer text = "Максимвльный возраст" />
                     <input type="text" value={this.state.maxAge} onChange={this.maxAgeChange}/>
-                    <TextContainer text = "Инкубационный период"/>
+                    <TextContainer text = "Эффективность"/>
                     <input type="text" value={this.state.efficiency} onChange={this.efficiencyChange}/>
-                    <button onClick={() =>this.props.vaccineAdder(this.state.virusId, this.state.maxAge ,this.state.efficiency)}>Добавить</button>
+                    <button onClick={() =>this.props.vaccineAdder(this.state.virusId,this.state.vaccineId, this.state.maxAge ,this.state.efficiency)}>Добавить</button>
                     <button onClick={() =>this.props.cancelVaccine()}>Отмена</button>
                 </div>
             </div>

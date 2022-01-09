@@ -6,11 +6,13 @@ class VirusAdder extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            virus_id: "vir",
             infectiousness: 0,
             mortality: 0,
             incubation_period: 0,
             asymptomatic_prob: 0
         }
+        this.virusIdChange = this.virusIdChange.bind(this);
         this.infectiousnessChange = this.infectiousnessChange.bind(this);
         this.mortalityChange = this.mortalityChange.bind(this);
         this.incubationPeriodChange = this.incubationPeriodChange.bind(this);
@@ -36,10 +38,17 @@ class VirusAdder extends React.Component{
             asymptomatic_prob: event.target.value
         });
     }
+    virusIdChange(event){
+        this.setState({
+            virus_id: event.target.value
+        });
+    }
     render() {
         return (
             <div className = "darkened">
                 <div className = "modal">
+                    <TextContainer text = "Название"/>
+                    <input type="text" value={this.state.virus_id} onChange={this.virusIdChange}/>
                     <TextContainer text = "Заразность"/>
                     <input type="text" value={this.state.infectiousness} onChange={this.infectiousnessChange}/>
                     <TextContainer text = "Смертность" />
@@ -48,7 +57,7 @@ class VirusAdder extends React.Component{
                     <input type="text" value={this.state.incubation_period} onChange={this.incubationPeriodChange}/>
                     <TextContainer text = "Шанс безсимптомного заболевания"/>
                     <input type="text" value={this.state.asymptomatic_prob} onChange={this.asymptomaticProbChange}/>
-                    <button onClick={() =>this.props.virusAdder(this.state.infectiousness, this.state.mortality ,this.state.incubation_period ,this.state.asymptomatic_prob)}>Добавить</button>
+                    <button onClick={() =>this.props.virusAdder(this.state.virus_id, this.state.mortality, this.state.incubation_period ,this.state.asymptomatic_prob,this.state.infectiousness)}>Добавить</button>
                     <button onClick={() =>this.props.cancelVirus()}>Отмена</button>
                 </div>
             </div>

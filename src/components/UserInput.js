@@ -4,12 +4,14 @@ import StrainForm from "./StrainForm";
 import VirusAdder from "./VirusAdder"
 import RestrictionForm from "./RestrictionForm";
 import VaccineAdder from "./VaccineAdder";
+import RemedyAdder from "./RemedyAdder";
 class UserInput extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             virusModalShow: false,
             vaccineModalShow: false,
+            remedyModalShow:false,
             viruses: [],
             vaccines: [],
             remedies: []
@@ -20,6 +22,10 @@ class UserInput extends React.Component{
         this.addVaccineModal = this.addVaccineModal.bind(this);
         this.addVaccine = this.addVaccine.bind(this);
         this.cancelVaccine = this.cancelVaccine.bind(this);
+        this.addRemedy = this.addRemedy.bind(this);
+        this.addRemedyModal = this.addRemedyModal.bind(this);
+        this.cancelRemedy = this.cancelRemedy.bind(this);
+        this.currentCurfewChange = this.currentCurfewChange.bind(this);
     }
     componentDidMount() {
         getViruses(this);
@@ -36,8 +42,8 @@ class UserInput extends React.Component{
             virusModalShow: true
         })
     }
-    addVirus(infectiousness, mortality ,incubationPeriod ,asymptomaticProb){
-        setVirus(mortality, incubationPeriod, asymptomaticProb, infectiousness)
+    addVirus(virusId, mortality, incubationPeriod, asymptomaticProb, infectiousness){
+        setVirus(virusId, mortality, incubationPeriod, asymptomaticProb, infectiousness)
         this.setState({
             virusModalShow: false
         })
@@ -52,7 +58,8 @@ class UserInput extends React.Component{
             vaccineModalShow: true
         })
     }
-    addVaccine(virusId, maxAge, efficiency){
+    addVaccine(virusId, vaccineId, maxAge, efficiency){
+        setVaccine(virusId, vaccineId, maxAge, efficiency)
         this.setState({
             vaccineModalShow: false
         })
@@ -62,14 +69,37 @@ class UserInput extends React.Component{
             vaccineModalShow: false
         })
     }
+    addRemedy(name, efficiency, comfortable){
+        setRemedy(name, efficiency, comfortable)
+        this.setState({
+            remedyModalShow: false
+        })
+    }
+    addRemedyModal(){
+        this.setState({
+            remedyModalShow: true
+        })
+    }
+    cancelRemedy(){
+        this.setState({
+            remedyModalShow: false
+        })
+    }
+    currentRemedyChange(remedyName){
+        setCurrentRemedy(remedyName);
+    }
+    currentCurfewChange(curfew){
+        setCurrentCurfew(curfew);
+    }
     render() {
         return(
             <div className="userInput">
                 <StrainForm id="virusForm" tableName = "Вирусы" data={this.state.viruses} addFunction={this.addVirusModal}/>
                 <StrainForm id="vacForm" tableName = "Вакцины" data={this.state.vaccines} addFunction={this.addVaccineModal}/>
-                <RestrictionForm remedies={this.state.remedies}/>
+                <RestrictionForm remedies={this.state.remedies} addRemedyModal={this.addRemedyModal} currentRemedyChange={this.currentRemedyChange} currentCurfewChange={this.currentCurfewChange}/>
                 {addVirusesForm(this.state.virusModalShow, this.addVirus, this.cancelVirus)}
                 {addVaccineForm(this.state.vaccineModalShow, this.addVaccine, this.cancelVaccine)}
+                {addRemedyForm(this.state.remedyModalShow, this.addRemedy, this.cancelRemedy)}
             </div>
         );
     }
@@ -127,7 +157,13 @@ function addVaccineForm(isShow, addVaccine, cancel){
     }
     return "";
 }
-function setVirus(mortality, incubationPeriod, asymptomaticProb, infectiousness){
+function addRemedyForm(isShow, addRemedy, cancel){
+    if(isShow){
+        return <RemedyAdder vaccineAdder={addRemedy} cancelVaccine={cancel}/>
+    }
+    return "";
+}
+function setVirus(virusId, mortality, incubationPeriod, asymptomaticProb, infectiousness){
     fetch("http://localhost:8081/addVirus", {
         method: 'POST',
         mode: 'cors',
@@ -135,12 +171,68 @@ function setVirus(mortality, incubationPeriod, asymptomaticProb, infectiousness)
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify({
+            virusId: virusId,
             mortality: mortality,
             incubationPeriod: incubationPeriod,
             asymptomaticProb: asymptomaticProb,
             infectiousness: infectiousness,
         })
 
+    }).then()
+}
+function setVaccine(virusId, vaccineId, maxAge, efficiency){
+    fetch("http://localhost:8081/addVaccine", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            virusId: virusId,
+            vaccineId: vaccineId,
+            maxAge: maxAge,
+            efficiency: efficiency,
+        })
+    }).then()
+}
+function setRemedy(name, efficiency, comfortable){
+    fetch("http://localhost:8081/addRemedy", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            name: name,
+            efficiency: efficiency,
+            comfortable: comfortable,
+        })
+    }).then()
+}
+function setCurrentRemedy(name){
+    fetch("http://localhost:8081/setCurrentRemedy", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            name: name,
+            efficiency: 0,
+            comfortable: 0,
+        })
+    }).then()
+}
+function setCurrentCurfew(curfew){
+    fetch("http://localhost:8081/setCurrentCufrew", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            curfew: curfew
+        })
     }).then()
 }
 export default UserInput;
