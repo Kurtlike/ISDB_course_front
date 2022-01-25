@@ -10,7 +10,8 @@ class HeaderStatistics extends React.Component{
             regular: 0,
             infected: 0,
             died: 0,
-            speed: 1
+            speed: 1,
+            date: ""
         }
         this.speedUp=this.speedUp.bind(this);
         this.speedDown=this.speedDown.bind(this);
@@ -18,6 +19,7 @@ class HeaderStatistics extends React.Component{
     }
     componentDidMount() {
         this.interval = setInterval(()=>  getStatistic(this),1000);
+        this.interval = setInterval(()=>  getDate(this),1000);
     }
     speedUp(){
         let speed = this.state.speed + 1;
@@ -50,12 +52,12 @@ class HeaderStatistics extends React.Component{
         return (
             <div id="header" className="divContainers textContainers" >
                 <button className="textContainers" onClick={start}>Начать</button>
-                    <div id="generalStatistics" className="divContainers textContainers">
-                        <TextContainer text = {this.state.vaccinated} classN = "greenText textContainers"/>
-                        <TextContainer text = {this.state.regular} classN = "regularText textContainers"/>
-                        <TextContainer text = {this.state.infected} classN = "yellowText textContainers"/>
-                        <TextContainer text = {this.state.died} classN = "redText textContainers"/>
-                    </div>
+                <div id="generalStatistics" className="divContainers textContainers">
+                    <TextContainer text = {this.state.vaccinated} classN = "greenText textContainers"/>
+                    <TextContainer text = {this.state.regular} classN = "regularText textContainers"/>
+                    <TextContainer text = {this.state.infected} classN = "yellowText textContainers"/>
+                    <TextContainer text = {this.state.died} classN = "redText textContainers"/>
+                </div>
                 <div id="speedButtons">
                     <svg id="left" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" fill="none" onClick={this.speedDown}>
                         <path d="M 40 0 L 40 80 L 0 40 Z" stroke="black" strokeWidth={2} fill={"#555151"} opacity={0.2}/>
@@ -68,6 +70,9 @@ class HeaderStatistics extends React.Component{
                     <svg id="right" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" fill="none" onClick={this.speedUp}>
                         <path d="M 0 0 L 0 80 L 40 40 Z" stroke="black" strokeWidth={2} fill={"#555151"} opacity={0.2}/>
                     </svg>
+                </div>
+                <div id="date" className="divContainers textContainers">
+                    <TextContainer text = {this.state.date} classN = "greenText textContainers"/>
                 </div>
             </div>
         );
@@ -85,6 +90,20 @@ function getStatistic(state) {
                     regular: result.regular,
                     infected: result.infected,
                     died: result.died
+                })
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+}
+function getDate(state) {
+    fetch("http://localhost:8081/getDate")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                state.setState({
+                    date: result.value
                 })
             },
             (error) => {
